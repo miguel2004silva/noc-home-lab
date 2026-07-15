@@ -1,0 +1,46 @@
+services:
+
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql:ubuntu-7.0-latest
+    container_name: srv-zabbix-server
+    restart: always
+
+    environment:
+      DB_SERVER_HOST: srv-db-zabbix
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: Zabbix@123
+
+    ports:
+      - "10051:10051"
+
+    networks:
+      - zabbix-net
+
+
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql:ubuntu-7.0-latest
+    container_name: srv-zabbix-web
+    restart: always
+
+    environment:
+
+      DB_SERVER_HOST: srv-db-zabbix
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: Zabbix@123
+
+      ZBX_SERVER_HOST: srv-zabbix-server
+
+      PHP_TZ: America/Sao_Paulo
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - zabbix-net
+
+
+networks:
+
+  zabbix-net:

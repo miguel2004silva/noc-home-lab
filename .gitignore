@@ -1,0 +1,19 @@
+# Banco de dados
+database/
+
+# Backups
+backup/
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.swp
+
+# Docker
+**/data/
+**/storage/
+
+# Git
+.git/

@@ -1,0 +1,21 @@
+services:
+
+  srv-web:
+    image: nginx:latest
+    container_name: WEB-PROD01
+
+    restart: unless-stopped
+
+    ports:
+      - "8081:80"
+
+    volumes:
+      - ./html:/usr/share/nginx/html
+
+    networks:
+      - noc-network
+
+networks:
+
+  noc-network:
+    driver: bridge
